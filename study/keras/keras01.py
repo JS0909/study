@@ -11,7 +11,7 @@ y = np.array([1, 2, 3])
 model = Sequential()
 model.add(Dense(3, input_dim=1))  # Dense(출력, input dimention)
 model.add(Dense(5))  # 위에서 add 되기 때문에 input 따로 필요 x
-model.add(Dense(6))
+model.add(Dense(6)) # 곱연산으로 들어감
 model.add(Dense(3))
 model.add(Dense(1))
 

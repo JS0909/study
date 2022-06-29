@@ -7,12 +7,12 @@
 # hyper parameter tuning
 # 노드 갯수, 레이어 깊이, 훈련 횟수, 분할
 
-
-# 1. 데이터
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import tensorflow as tf
-import numpy as np  
+import numpy as np
+
+# 1. 데이터
 x = np.array([1, 2, 3, 5, 4])
 y = np.array([1, 2, 3, 4, 5])
 
@@ -21,7 +21,11 @@ model = Sequential()
 model.add(Dense(70, input_dim=1))
 model.add(Dense(60))
 model.add(Dense(70))
-model.add(Dense(60))
+model.add(Dense(90))
+model.add(Dense(80))
+model.add(Dense(50))
+model.add(Dense(70))
+model.add(Dense(80))
 model.add(Dense(70))
 model.add(Dense(60))
 model.add(Dense(1))
