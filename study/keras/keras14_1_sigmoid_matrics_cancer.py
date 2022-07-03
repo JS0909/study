@@ -25,12 +25,12 @@ x_train, x_test, y_train, y_test =  train_test_split(x, y, train_size=0.8, shuff
 
 # 2. 모델구성
 model = Sequential()
-model.add(Dense(5, activation='linear', input_dim=30))
+model.add(Dense(5, activation='relu', input_dim=30))
 model.add(Dense(50, activation=None)) # activation defualt = None (linear)
 model.add(Dense(40, activation = 'relu')) # !중간에서만 쓸 수 있다, 평타 85% 이상 개좋은 놈
 model.add(Dense(100, activation='sigmoid'))
-model.add(Dense(20))
-model.add(Dense(10))
+model.add(Dense(20, activation='relu'))
+model.add(Dense(10, activation='relu'))
 model.add(Dense(1, activation='sigmoid')) # 0과 1 사이의 유리수로 최종 out put이 저장된다
 
 # 3. 컴파일, 훈련
@@ -76,4 +76,24 @@ plt.xlabel('epochs')
 plt.legend()
 plt.show()
 
-# 마지막 좋아졌다 어떻다 감상 적기
+# out_put: sigmoid, the others: linear
+# loss :  [binary_crossentropy: 0.19129939377307892, accuracy: 0.9385964870452881, mse: 0.05645167455077171]
+# acc스코어 :  0.9385964912280702
+
+# sigmoid 2, relu 1
+# loss :  [binary_crossentropy: 0.24581895768642426, accuracy: 0.9035087823867798, mse: 0.07187477499246597]
+# acc스코어 :  0.9035087719298246
+
+# sigmoid 2, relu 2
+# loss :  [binary_crossentropy: 0.21663619577884674, accuracy: 0.9122806787490845, mse: 0.06439163535833359]
+# acc스코어 :  0.9122807017543859
+
+# sigmoid 2, relu 3
+# loss :  [binary_crossentropy: 0.1875421404838562, accuracy: 0.9298245906829834, mse: 0.05643652752041817]
+# acc스코어 :  0.9298245614035088
+
+# sigmoid 2, relu 4
+# loss :  [binary_crossentropy: 0.24203625321388245, accuracy: 0.9035087823867798, mse: 0.07180382311344147]
+# acc스코어 :  0.9035087719298246
+
+# 희한하네.. 어째 sigmoid랑 relu는 섞이면 더 안좋아지는거 같냐

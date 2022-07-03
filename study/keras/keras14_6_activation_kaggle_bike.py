@@ -53,7 +53,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)
 # 2. 모델 구성
 model = Sequential()
 model.add(Dense(10, input_dim=12))
-model.add(Dense(30))
+model.add(Dense(30, activation='relu'))
 model.add(Dense(30, activation='relu'))
 model.add(Dense(30))
 model.add(Dense(50, activation='relu'))
@@ -99,3 +99,21 @@ y_submit = model.predict(test_set)
 submission['count'] = np.abs(y_submit) # 마이너스 나오는거 절대값 처리
 
 submission.to_csv(path + 'submission.csv', index=True)
+
+# linear only
+# loss:  [mse: 21339.32421875, mae: 109.42781066894531]
+# r2:  0.3916957657818575
+
+# with 2 relu
+# loss:  [2070.903076171875, 30.01389503479004]
+# r2:  0.9353254005377757
+
+# with 3 relu
+# loss:  [mse: 1768.896484375, mae: 26.64974021911621]
+# r2:  0.9469869764493036
+
+# with 4 relu
+# loss:  [mse: 2206.21435546875, mae: 30.686269760131836]
+# r2:  0.9347932518442085
+
+# relu를 세번정도 섞어줬더니 성능이 비약적으로 좋아지는 것을 확인했다

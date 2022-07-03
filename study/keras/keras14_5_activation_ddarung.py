@@ -36,16 +36,22 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)
 
 # 2. 모델 구성
 model = Sequential()
-model.add(Dense(10, input_dim=9))
-model.add(Dense(30))
-model.add(Dense(50, activation='relu'))
-model.add(Dense(20, activation='relu'))
+model.add(Dense(10, activation='relu', input_dim=9))
+model.add(Dense(30
+                , activation='relu'
+                ))
+model.add(Dense(50
+                , activation='relu'
+                ))
+model.add(Dense(20
+                , activation='relu'
+                ))
 model.add(Dense(1))
 
 # 3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
-ES = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50, restore_best_weights=True)
-log = model.fit(x_train, y_train, epochs=1000, batch_size=50, callbacks=[ES], validation_split=0.25)
+Es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50, restore_best_weights=True)
+log = model.fit(x_train, y_train, epochs=1000, batch_size=50, callbacks=[Es], validation_split=0.25)
 
 # 4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
@@ -66,10 +72,10 @@ plt.figure(figsize=(9,6))
 plt.plot(log.history['loss'], marker='.', c='red', label='loss')
 plt.plot(log.history['val_loss'], marker='.', c='blue', label='val_loss')
 plt.grid()
-plt.title('캘리포니아//로스와 발리데이션 로스')
+plt.title('따릉이//로스와 발리데이션 로스')
 plt.ylabel('loss')
 plt.xlabel('epochs')
-plt.legend()
+# plt.legend()
 plt.show()
 #======그래프======
 
@@ -82,7 +88,20 @@ submission.to_csv(path + 'submission.csv', index=True) # 실제 파일에 push�
                                                         # False: 존재하는 index자리 삭제하고 넣겠다
                                                         # True: 존재하는 index자리 유지하고 넣겠다
                                                                
+# linear only
+# loss:  [mse: 2809.820068359375, mae: 39.7796745300293]
+# r2:  0.5576589362116394
 
-
+# with 2 relu
 # loss:  [mse: 2680.8916015625, mae: 38.65082931518555]
 # r2:  0.6034229453546867
+
+# with 3 relu
+# loss:  [mse: 2608.839111328125, mae: 39.5834846496582]
+# r2:  0.6103558331255308
+
+# with 4 relu
+# loss:  [mse: 2624.9033203125, mae: 36.541927337646484]
+# r2:  0.598056884925878
+
+# relu 세개정도 사용했을 때 가장 효율적으로 보임
