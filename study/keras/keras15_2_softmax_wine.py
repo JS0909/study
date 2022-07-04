@@ -5,6 +5,8 @@ from tensorflow.python.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import numpy as np
+import tensorflow as tf
+import pandas as pd
 from tensorflow.python.keras.callbacks import EarlyStopping
 
 # 1. 데이터
@@ -75,8 +77,8 @@ print(y_pred)
 '''
 
 y_predict = model.predict(x_test)
-y_predict = np.argmax(y_predict, axis=1) # 행끼리 비교해서 몇번째 인덱스가 제일 큰지 알려줌
-y_test = np.argmax(y_test, axis=1) # y_test도 argmax를 해서 같은 리스트를 비교하기
+y_predict = tf.argmax(y_predict, axis=1) # 행끼리 비교해서 몇번째 인덱스가 제일 큰지 알려줌
+y_test = tf.argmax(y_test, axis=1) # y_test도 argmax를 해서 같은 리스트를 비교하기
 
 print(y_test)
 print(y_predict)

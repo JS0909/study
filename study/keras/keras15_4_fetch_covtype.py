@@ -55,7 +55,7 @@ model.add(Dense(7, activation='softmax'))
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 Es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50, restore_best_weights=True)
-log = model.fit(x_train, y_train, epochs=1, batch_size=1000, callbacks=[Es], validation_split=0.2)
+log = model.fit(x_train, y_train, epochs=500, batch_size=128, callbacks=[Es], validation_split=0.2)
 # batch_size 디폴트는 보통 32로 한다 32, 64 ~~ 순으로 올려봄 보통
 
 #4. 평가, 예측

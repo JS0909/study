@@ -7,8 +7,8 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 import pandas as pd
 from tensorflow.python.keras.callbacks import EarlyStopping
-
 import tensorflow as tf
+
 tf.random.set_seed(99)
 # y = wx + b의 w값을 처음 랜덤으로 긋는 것을 어떻게 그을지 고정하고 시작
 
@@ -52,9 +52,9 @@ print(y.shape)
 #===========================================================================================================================
 
 #==========================================pandas.get_dummies===============================================================
-# y = pd.get_dummies(y)
-# print(y.shape)
-# print(y)
+y = pd.get_dummies(y)
+print(y.shape)
+print(y)
 #===========================================================================================================================
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8,shuffle=True, random_state=9)
 # 안섞으면 2가 trainset에 안나옴 순차적으로 0부터 나오는 걸 짜르게 되니까
