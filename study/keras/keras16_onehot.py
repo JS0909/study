@@ -12,7 +12,7 @@ print(y)
 
 # 2. tensorflow의 to_categorical
 #       무조건 0부터 칼럼 생성
-#       만약 데이터 레이블이 3부터 있다면 0, 1, 2 체킹 칼럼이 생성되어버림
+#       만약 데이터 레이블이 3부터 있다면 0, 1, 2 라벨(체킹 칼럼)이 생성되어버림
 '''
 from tensorflow.keras.utils import to_categorical
 y = to_categorical(y) # 인코딩 방식때문에 쉐이프가 1개 더 생겼음, 그래서 OneHotEncoder나 get_dummies를 사용해줘야함, 차이는 keras16 파일에서

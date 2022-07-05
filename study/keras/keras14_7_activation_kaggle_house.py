@@ -226,7 +226,6 @@ print('r2스코어 : ', r2)
 #======그래프======
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
 
 mpl.rcParams['font.family'] = 'malgun gothic'
 mpl.rcParams['axes.unicode_minus'] = False
