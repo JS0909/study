@@ -85,6 +85,13 @@ test_set = test_set.drop(columns = ['PassengerId','Name','Ticket'],axis=1)
 y_submit = model.predict(test_set)
 y_submit = np.round(y_submit)
 
+from sklearn.preprocessing import OneHotEncoder
+oh = OneHotEncoder()
+y_submit = y_submit.reshape(-1,1) 
+oh.fit(y_submit)
+y_submit = oh.transform(y_submit).toarray()
+y_submit = tf.argmax(y_submit, axis=1)
+
 print(y_submit)
 
 submission['Survived'] = np.abs(y_submit) # 마이너스 나오는거 절대값 처리
