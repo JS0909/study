@@ -1,10 +1,12 @@
 1. 그래픽 드라이버 설치 516.59
 2. cuda 설치 11.4.4
+CUDA Toolkit Archive 검색
 CUDA의 Visual Studio Integration은 꼭 빼고 설치한다 + sample, documentation도 뺀다
 CUDA 외의 것 다 체크 해제
 CUDA 설치 위치 확인해두기
 
 3. cuDNN v8.2.4 for cuda 11.4 // gpu 가속
+cuDNN Archive 검색
 CUDA 설치한 곳에 받아온 cuDNN 압축 푼 파일을 덮어 씀
 
 4. python 3.9.7
@@ -29,7 +31,7 @@ conda env list 명령어 치고 설치된거 확인
 
 
 	그래픽드라이버 버전 확인 명령어: nvidia-smi
-	Driver Versiond: 현재 버전
+	Driver Version: 현재 버전
 	CUDA Version: 글카가 원하는 쿠다 버전
 	
 	쿠다 버전 확인 명령어: nvcc -V
