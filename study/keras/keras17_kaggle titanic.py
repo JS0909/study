@@ -87,10 +87,9 @@ test_set.replace({'Sex':{'male':0,'female':1}, 'Embarked':{'S':0,'C':1,'Q':2}}, 
 test_set = test_set.drop(columns = ['PassengerId','Name','Ticket'],axis=1)
 #---------------------------------------------------------------------------------------------------
 
-y_submit = model.predict(test_set)
+y_submit = model.predict(test_set) # 제출용 결과값 변수에 저장
 y_submit = np.round(y_submit) # 확률에서 반올림을 시켜서 죽음(0), 살음(1)을 뽑아냄
 y_submit = y_submit.astype(int) # 이상하게 subission 파일이 1.0, 0.0으로 표기되서 int타입으로 전환시키는 작업(소수점 아예 없애는 작업)
-submission['Survived'] = np.abs(y_submit) # 혹시라도 마이너스 나오는거 절대값 처리
 
 submission['Survived'] = y_submit
 submission.to_csv(path + 'gender_submission.csv', index=True)
