@@ -11,7 +11,6 @@ x = datasets.data
 y = datasets.target
 x_train, x_test, y_train, y_test =  train_test_split(x, y, train_size=0.7, shuffle=True, random_state=9)
 
-'''
 print(x)
 print(y)
 print(x.shape) # (506, 13)
@@ -20,7 +19,7 @@ print(y.shape) # (506,)
 print(datasets.feature_names) # 열 별로 이름 나옴
 #['CRIM' 'ZN' 'INDUS' 'CHAS' 'NOX' 'RM' 'AGE' 'DIS' 'RAD' 'TAX' 'PTRATIO' 'B' 'LSTAT']
 print(datasets.DESCR)
-'''
+
 
 ##########################
 # [실습] 아래를 완성할 것
