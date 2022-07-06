@@ -1,3 +1,5 @@
+# keras18_gpu_test3 파일의 서머리를 확인해보시오.
+
 from sklearn.datasets import fetch_covtype
 from sklearn.preprocessing import OneHotEncoder
 from tensorflow.python.keras.models import Sequential
@@ -53,6 +55,8 @@ model.add(Dense(300, activation='relu'))
 model.add(Dense(200, activation='relu'))
 model.add(Dense(7, activation='softmax'))
 
+model.summary()
+
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 Es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50, restore_best_weights=True)
@@ -95,3 +99,6 @@ print('걸린 시간: ', end_time-start_time)
 
 # GPU 걸린 시간:  327.42542028427124
 # CPU 걸린 시간:  101.80242276191711
+
+# Total params: 162,757
+# GPU 걸린 시간:  321.1235160827637
