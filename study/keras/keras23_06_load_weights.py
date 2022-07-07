@@ -50,7 +50,7 @@ r2 = r2_score(y_test, y_predict)
 print('r2:', r2)
 
 # weight만 땡기면 모델 구성, 컴파일 다 해줘야됨, 훈련은 다시 안해도 됨
-# save_model, load_model, save
+# save_model, load_model, save_weights, load_weights
 
 # 랜덤 가중치 로드
 # loss:  598.9628295898438
