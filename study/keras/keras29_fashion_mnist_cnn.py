@@ -17,7 +17,7 @@ x_train = x_train.reshape
 x_test = x_test.reshape
 
 print(np.unique(y_train, return_counts=True)) 
-# (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=uint8), array([6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000, 6000], dtype=int64))
+
 
 y_train= to_categorical(y_train)
 y_test=to_categorical(y_test)
