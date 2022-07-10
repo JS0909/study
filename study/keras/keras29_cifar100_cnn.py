@@ -5,7 +5,7 @@ import numpy as np
 from tensorflow.python.keras.callbacks import EarlyStopping
 import tensorflow as tf
 from sklearn.metrics import accuracy_score
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 

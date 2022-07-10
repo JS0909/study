@@ -20,7 +20,7 @@ x_test = x_test.reshape(10000, 32, 32, 3)
 print(np.unique(y_train, return_counts=True)) 
 #(array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=uint8), array([5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000], dtype=int64))
 
-from keras.utils import to_categorical
+from tensorflosw.keras.utils import to_categorical # 노란 줄 없애겠다고 tensorflow 빼버리면 이 버전에서는 to_categofical 못쓴다고 나옴;
 y_train= to_categorical(y_train)
 y_test=to_categorical(y_test)
 
