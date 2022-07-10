@@ -1,0 +1,3 @@
+레지스트리 편집기
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem
+LongPathsEnabled 이거 우클릭 후 1로 수정, 재부팅
