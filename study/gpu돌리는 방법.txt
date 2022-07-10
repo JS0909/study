@@ -42,3 +42,6 @@ C말고 다른 드라이브에 가상환경 생성 시
 conda create --D:/tmp/가상환경이름 python=2.7 anaconda
 conda activate D:/tmp/가상환경이름
 아나콘다를 C가 아닌 다른 드라이브에 깔았다면 일반 cmd 말고 아나콘다 cmd를 쓰자...
+
+tf282gpu : 텐서플로 버전 282, 파이썬 3.9.7
+tf281cpu : 텐서플로 버전 281, 파이썬 3.9.12
