@@ -10,5 +10,5 @@ print(x_train[0])
 print(y_train[0]) # 5
 
 import matplotlib.pyplot as plt
-plt.imshow(x_train[0], 'gray')
+plt.imshow(x_train[0], 'gray') # 이미지 보여주기
 plt.show()
