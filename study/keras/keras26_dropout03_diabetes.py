@@ -3,7 +3,6 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import Dense, Dropout
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
-import datetime
 from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 # 1. 데이터
