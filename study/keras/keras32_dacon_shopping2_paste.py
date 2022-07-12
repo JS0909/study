@@ -121,20 +121,18 @@ batchnorm4 = BatchNormalization()(dense4)
 activ4 = Activation('relu')(batchnorm4)
 drp7 = Dropout(0.2)(activ4)
 output1 = Dense(1)(drp7)
-model = Model(inputs=input1, outputs=output1)   
+model = Model(inputs=input1, outputs=output1) 
 
 
 #3. 컴파일, 훈련
-
-
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
 
-from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.python.keras.callbacks import EarlyStopping
 
 earlyStopping = EarlyStopping(monitor='val_loss', patience=300, mode='auto', verbose=1, 
                               restore_best_weights=True)        
 
-hist = model.fit(x_train, y_train, epochs=10000, batch_size=64,
+hist = model.fit(x_train, y_train, epochs=3000, batch_size=64,
                  validation_split=0.3,
                  callbacks=[earlyStopping],
                  verbose=1)
@@ -159,22 +157,18 @@ print('loss : ', loss)
 print("RMSE : ", rmse)
 print('r2스코어 : ', r2)
 
-print(test_set2)
+# print(test_set2)
 
 y_submit = model.predict(test_set2)
 
-print(y_submit)
-print(y_submit.shape) # (180, 1)
+# print(y_submit)
+# print(y_submit.shape) # (180, 1)
 
 submission_set = pd.read_csv(path + 'submission.csv', # + 명령어는 문자를 앞문자와 더해줌
                              index_col=0) # index_col=n n번째 컬럼을 인덱스로 인식
 submission_set['Weekly_Sales'] = y_submit
 
 submission_set.to_csv(path + 'submission.csv', index = True)
-
-# loss :  [11581024256.0, 60665.58984375]
-# RMSE :  107615.17241525506
-# r2스코어 :  0.9655605086138119
 
 # loss :  [10525473792.0, 59570.9453125]
 # RMSE :  102593.73938212715
@@ -183,5 +177,13 @@ submission_set.to_csv(path + 'submission.csv', index = True)
 # loss :  [10323171328.0, 59649.91015625]
 # RMSE :  101603.00622509912
 # r2스코어 :  0.9693010986384939
+
+# loss :  [10702969856.0, 59387.4765625]
+# RMSE :  103455.16215286315
+# r2스코어 :  0.9681716555890509
+
+# loss :  [10392432640.0, 60061.23828125]
+# RMSE :  101943.2686141623
+# r2스코어 :  0.969095136770064
 
 # 안결님 코드
