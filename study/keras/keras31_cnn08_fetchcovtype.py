@@ -39,7 +39,7 @@ x_test = x_test.reshape(116203, 9, 6, 1)
 model = Sequential()
 model.add(Conv2D(filters=80, kernel_size=(1,1), strides=1, padding='same', input_shape=(9,6,1)))
 model.add(MaxPool2D((1,1), padding='same'))
-model.add(Conv2D(100, (1,1),padding='valid', activation='relu'))
+model.add(Conv2D(100, (1,1),padding='valid', activation='swish'))
 model.add(Dropout(0.2))
 model.add(Conv2D(90, (1,1),padding='same', activation='relu'))
 model.add(Dropout(0.1))
@@ -51,7 +51,7 @@ model.add(Dense(7, activation='softmax'))
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 Es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50, restore_best_weights=True)
-log = model.fit(x_train, y_train, epochs=100, batch_size=64, callbacks=[Es], validation_split=0.2)
+log = model.fit(x_train, y_train, epochs=128, batch_size=128, callbacks=[Es], validation_split=0.2)
 
 
 #4. 평가, 예측
@@ -71,3 +71,5 @@ print('acc스코어 : ', acc_sc)
 # acc스코어 :  0.7107303598013821
 
 # CNN
+# loss :  0.4634298086166382
+# acc스코어 :  0.8050910905914649
