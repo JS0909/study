@@ -25,7 +25,8 @@ test_set = pd.read_csv(path+'test.csv', index_col=0)
 ### 결측치 처리(일단 제거로 처리) ###
 print(train_set.info())
 print(train_set.isnull().sum()) # 결측치 전부 더함
-train_set = train_set.dropna() # nan 값(결측치) 자동으로 0으로 만듦
+# train_set = train_set.dropna() # nan 값(결측치) 열 없앰
+train_set = train_set.fillna(0) # 결측치 0으로 채움
 print(train_set.isnull().sum()) # 없어졌는지 재확인
 
 x = train_set.drop(['count'], axis=1) # axis = 0은 열방향으로 쭉 한줄(가로로 쭉), 1은 행방향으로 쭉 한줄(세로로 쭉)
