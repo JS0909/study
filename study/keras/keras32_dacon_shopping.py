@@ -32,11 +32,14 @@ test_set['year'] = test_set['Date'].dt.strftime('%Y')
 test_set['month'] = test_set['Date'].dt.strftime('%m')
 test_set['day'] = test_set['Date'].dt.strftime('%d')
 test_set = test_set.drop(['Date'], axis=1)
+# 년도와 일자에 따른 변화가 크게 없어서 월만 뺌
 
 # 트레인과 테스트에 있는 연월일들의 종류가 달라서 한꺼번에 인코딩 해야됨
 train_test = pd.concat([train_set, test_set])
 # Weekly_Sales를 포함한 채로 합치면 라벨 인코딩을 통해 test_set에도 Weekly_Sales 칼럼이 생김
-cols = ['month', 'day', 'year']
+cols = ['month'
+        , 'day', 'year'
+        ]
 for col in cols:
     le = LabelEncoder()
     train_test[col] = le.fit_transform(train_test[col])
@@ -51,20 +54,20 @@ print(train_set.shape, test_set.shape)
 
 train_set = pd.get_dummies(train_set, columns=['Store'])
 test_set = pd.get_dummies(test_set, columns=['Store'])
-print(train_set.shape, test_set.shape) # (6255, 58) (180, 57)
+print(train_set.shape, test_set.shape)
 
 x = train_set.drop(['Weekly_Sales'], axis=1)
 y = train_set['Weekly_Sales']
 
 print(x.shape,y.shape)
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=9)
-print(x_train.shape) # (5004, 13)
+print(x_train.shape)
 
 scaler = MinMaxScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
-print(x_train.shape, y_train.shape) # (5004, 13) (5004,)
+print(x_train.shape, y_train.shape)
 
 # # 2. 모델 구성
 # 시퀀셜
@@ -88,13 +91,15 @@ drop2 = Dropout(0.1)(dense4)
 batchnorm2 = BatchNormalization()(drop2)
 dense5 = Dense(100, activation='swish')(batchnorm2)
 drop3 = Dropout(0.2)(dense5)
-output1 = Dense(1)(drop3)
+dense6 = Dense(100, activation='relu')(drop3)
+drop4 = Dropout(0.2)(dense6)
+output1 = Dense(1)(drop4)
 model = Model(inputs=input1, outputs=output1)
 
 # 3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
-Es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=128, restore_best_weights=True)
-log = model.fit(x_train, y_train, epochs=2000, batch_size=128, callbacks=[Es], validation_split=0.25)
+Es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=300, restore_best_weights=True)
+log = model.fit(x_train, y_train, epochs=3000, batch_size=128, callbacks=[Es], validation_split=0.25)
 model.save('./_save/keras32.msw')
 
 # model = load_model('./_save/keras32.msw')
@@ -112,23 +117,28 @@ rmse = RMSE(y_predict, y_test)
 print('rmse: ', rmse)
 
 # 5. 제출 준비
-# submission = pd.read_csv(path + 'submission.csv', index_col=0)
+submission = pd.read_csv(path + 'submission.csv', index_col=0)
 test_set = test_set.astype(np.float32)
 y_submit = model.predict(test_set)
 # 에러: Failed to convert a NumPy array to a Tensor (Unsupported object type int).
 # 변수명 = 변수명.astype(np.float32) 해주면 해결은 됨
 print(y_submit.shape)
-# submission['Weekly_Sales'] = y_submit
-# submission.to_csv(path + 'submission.csv', index=True)
+submission['Weekly_Sales'] = y_submit
+submission.to_csv(path + 'submission.csv', index=True)
 
-# loss:  [175242412032.0, 312922.40625]
-# r2:  0.45777688143409023
-# rmse:  418619.62794955465
-
-# loss:  [229574115328.0, 384410.6875]
-# r2:  0.28966727198096065
-# rmse:  479138.95858055534
 
 # loss:  [16499713024.0, 70918.6328125]
 # r2:  0.9489477113062993
 # rmse:  128451.20429720446
+
+# loss:  [15136667648.0, 68047.1640625]
+# r2:  0.9531651491124695
+# rmse:  123031.16688203003
+
+# loss:  [15622782976.0, 68504.734375]
+# r2:  0.9516610353194097
+# rmse:  124991.1443911953
+
+# loss:  [17436723200.0, 73562.3359375]
+# r2:  0.9460484868792954
+# rmse:  132048.16998412146
